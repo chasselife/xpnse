@@ -1,0 +1,45 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.form-header {
+  margin-bottom: 24px;
+}
+
+.form-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+  color: #333;
+}
+
+.expense-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    padding: 16px;
+  }
+
+  .form-header h1 {
+    font-size: 24px;
+  }
+}
+
+

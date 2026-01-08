@@ -1,0 +1,110 @@
+.category-card {
+  position: relative;
+  background: white;
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.category-card.edit-mode {
+  border-width: 3px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #f44336;
+  background: white;
+  z-index: 10;
+}
+
+.card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-content mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.card-content h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.card-content p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.card-info {
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.info-item .label {
+  color: #666;
+}
+
+.info-item .value {
+  color: #333;
+  font-weight: 500;
+}
+
+.edit-btn {
+  margin-top: 12px;
+  background-color: #2196f3;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .category-card {
+    min-height: 180px;
+    padding: 12px;
+  }
+
+  .card-content mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
+}

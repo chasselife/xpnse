@@ -5,6 +5,11 @@
     "packageManager": "pnpm"
   },
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "projects": {
     "xpnse": {
       "projectType": "application",
@@ -26,7 +31,7 @@
             ],
             "styles": [
               "src/material-theme.scss",
-              "src/styles.css"
+              "src/styles.scss"
             ]
           },
           "configurations": {

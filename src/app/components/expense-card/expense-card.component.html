@@ -1,0 +1,52 @@
+<div
+  class="expense-card"
+  [style.border-left-color]="expense().color"
+  [style.border-left-width]="'4px'"
+  [style.transform]="'translateX(' + -swipeOffset + 'px)'"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd()"
+  [routerLink]="['/expense', expense().id]"
+>
+  <div class="card-content">
+    <div class="card-header">
+      <mat-icon [style.color]="expense().color">{{ expense().icon }}</mat-icon>
+      <div class="header-text">
+        <h3>{{ expense().title }}</h3>
+        <p>{{ expense().description }}</p>
+      </div>
+    </div>
+    <div class="card-info">
+      <div class="info-item">
+        <span class="label">Total:</span>
+        <span class="value">{{ formatCurrency(totalCost()) }}</span>
+      </div>
+      @if (dateRange()) {
+      <div class="info-item">
+        <span class="label">Date Range:</span>
+        <span class="value"
+          >{{ formatDate(dateRange()!.min) }} - {{ formatDate(dateRange()!.max) }}</span
+        >
+      </div>
+      }
+      <div class="info-item">
+        @for(category of categories(); track category.id) {
+        <span class="text-xs px-3 py-1 bg-gray-100 text-gray-700 rounded-xl">{{
+          category.title
+        }}</span>
+        }
+      </div>
+    </div>
+  </div>
+  @if (showActions || swipeOffset > 60) {
+  <div class="card-actions">
+    <button mat-icon-button (click)="onEdit(); $event.stopPropagation()" class="edit-btn">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onDelete(); $event.stopPropagation()" class="delete-btn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  }
+</div>
+

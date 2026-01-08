@@ -6,8 +6,9 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-// Define a custom primary palette using #1DC873
-$custom-primary-palette: (
+
+
+$custom-primary: (
   50: #e8f8f0,
   100: #c5eed6,
   200: #9ee3ba,
@@ -40,34 +41,54 @@ $custom-primary-palette: (
   )
 );
 
-$custom-primary: mat.define-palette($custom-primary-palette);
+// Define a custom accent color palette (using a complementary color)
+$custom-accent: (
+  50: #fce4ec,
+  100: #f8bbd0,
+  200: #f48fb1,
+  300: #f06292,
+  400: #ec407a,
+  500: #e91e63,
+  600: #d81b60,
+  700: #c2185b,
+  800: #ad1457,
+  900: #880e4f,
+  A100: #ff80ab,
+  A200: #ff4081,
+  A400: #f50057,
+  A700: #c51162,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
 
-html {
-  height: 100%;
-  @include mat.theme((
+// Create the theme using m2- prefixed functions for Angular Material 18+
+$custom-theme-primary: mat.m2-define-palette($custom-primary);
+$custom-theme-accent: mat.m2-define-palette($custom-accent);
+$custom-theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$custom-theme: mat.m2-define-light-theme(
+  (
     color: (
-      primary: $custom-primary,
-      tertiary: mat.$orange-palette,
+      primary: $custom-theme-primary,
+      accent: $custom-theme-accent,
+      warn: $custom-theme-warn,
     ),
-    typography: Roboto,
-    density: 0,
-  ));
-}
+  )
+);
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
-  margin: 0;
-  height: 100%;
-}
+// Include the theme styles
+@include mat.all-component-themes($custom-theme);

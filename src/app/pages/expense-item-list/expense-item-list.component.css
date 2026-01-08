@@ -1,0 +1,122 @@
+.item-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.item-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+  color: #333;
+}
+
+.breadcrumb {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.items-summary {
+  display: flex;
+  gap: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-item .label {
+  font-size: 12px;
+  color: #666;
+}
+
+.summary-item .value {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.summary-item .value.cost {
+  color: #2196f3;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 48px;
+  font-size: 18px;
+}
+
+.error {
+  color: #f44336;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  color: #666;
+}
+
+.empty-state mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  font-size: 18px;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .item-list-container {
+    padding: 16px;
+  }
+
+  .item-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .item-list-header h1 {
+    font-size: 24px;
+  }
+
+  .items-summary {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+

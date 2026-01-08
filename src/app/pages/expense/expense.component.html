@@ -1,0 +1,46 @@
+<div class="expense-container">
+  <div class="expense-header">
+    <div class="header-left">
+      <a mat-icon-button [routerLink]="['/']">
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+      <h1>{{ expenseTitle }}</h1>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" [routerLink]="['/expense', expenseId, 'category', 'new']">
+        <mat-icon>add</mat-icon>
+        New Category
+      </button>
+      <button mat-icon-button (click)="toggleEditMode()">
+        <mat-icon>{{ editMode ? 'done' : 'edit' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  @if (categoryStore.loading()) {
+    <div class="loading">Loading categories...</div>
+  } @else if (categoryStore.error()) {
+    <div class="error">{{ categoryStore.error() }}</div>
+  } @else if (categoriesWithData.length === 0) {
+    <div class="empty-state">
+      <mat-icon>folder_open</mat-icon>
+      <p>No categories found. Create your first category to get started!</p>
+    </div>
+  } @else {
+    <div class="categories-grid">
+      @for (item of categoriesWithData; track item.category.id) {
+        <app-expense-category-card
+          [category]="item.category"
+          [totalCost]="item.totalCost"
+          [dateRange]="item.dateRange"
+          [expenseId]="expenseId"
+          [editMode]="editMode"
+          (edit)="onEditCategory($event)"
+          (delete)="onDeleteCategory($event)"
+        />
+      }
+    </div>
+  }
+</div>
+
+

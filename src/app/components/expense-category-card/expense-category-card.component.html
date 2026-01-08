@@ -1,0 +1,42 @@
+<div
+  class="category-card"
+  [style.background-color]="category().color + '20'"
+  [style.border-color]="category().color"
+  [class.edit-mode]="isEditMode() || editMode()"
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove()"
+  (touchend)="onTouchEnd()"
+  [routerLink]="['/expense', expenseId(), 'category', category().id, 'items']"
+>
+  @if (isEditMode() || editMode()) {
+  <button mat-icon-button class="delete-btn" (click)="onDelete(); $event.stopPropagation()">
+    <mat-icon>close</mat-icon>
+  </button>
+  }
+  <div class="card-content">
+    <mat-icon [style.color]="category().color">{{ category().icon }}</mat-icon>
+    <h3>{{ category().title }}</h3>
+    <p>{{ category().description }}</p>
+    <div class="card-info">
+      <div class="info-item">
+        <span class="label">Total:</span>
+        <span class="value">{{ formatCurrency(totalCost()) }}</span>
+      </div>
+      @if (dateRange()) {
+      <div class="info-item">
+        <span class="label">Range:</span>
+        <span class="value"
+          >{{ formatDate(dateRange()!.min) }} - {{ formatDate(dateRange()!.max) }}</span
+        >
+      </div>
+      }
+    </div>
+    @if (isEditMode() || editMode()) {
+    <button mat-raised-button class="edit-btn" (click)="onEdit(); $event.stopPropagation()">
+      <mat-icon>edit</mat-icon>
+      Edit
+    </button>
+    }
+  </div>
+</div>
+

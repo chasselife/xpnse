@@ -1,0 +1,115 @@
+.item-card {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-content {
+  flex: 1;
+  padding: 16px;
+  min-width: 0;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card-header mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #666;
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.header-text h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.header-text p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.info-item .label {
+  color: #666;
+}
+
+.info-item .value {
+  color: #333;
+  font-weight: 500;
+}
+
+.info-item .value.cost {
+  color: #2196f3;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sub-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  background: #f5f5f5;
+}
+
+.edit-btn {
+  color: #2196f3;
+}
+
+.delete-btn {
+  color: #f44336;
+}
+
+@media (max-width: 600px) {
+  .item-card {
+    margin-bottom: 8px;
+  }
+
+  .card-content {
+    padding: 12px;
+  }
+}
+
+

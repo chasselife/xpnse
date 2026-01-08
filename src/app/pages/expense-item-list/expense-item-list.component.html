@@ -1,0 +1,61 @@
+<div class="item-list-container">
+  <div class="item-list-header">
+    <div class="header-left">
+      <a mat-icon-button [routerLink]="['/expense', expenseId]">
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+      <div class="header-text">
+        <h1>{{ categoryTitle }}</h1>
+        <p class="breadcrumb">{{ expenseTitle }} / {{ categoryTitle }}</p>
+      </div>
+    </div>
+    <a
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/expense', expenseId, 'category', categoryId, 'item', 'new']"
+    >
+      <mat-icon>add</mat-icon>
+      New Item
+    </a>
+  </div>
+
+  @if (itemStore.loading()) {
+    <div class="loading">Loading items...</div>
+  } @else if (itemStore.error()) {
+    <div class="error">{{ itemStore.error() }}</div>
+  } @else if (itemStore.items().length === 0) {
+    <div class="empty-state">
+      <mat-icon>receipt_long</mat-icon>
+      <p>No items found. Create your first item to get started!</p>
+    </div>
+  } @else {
+    <div class="items-summary">
+      <div class="summary-item">
+        <span class="label">Total Items:</span>
+        <span class="value">{{ itemStore.items().length }}</span>
+      </div>
+      <div class="summary-item">
+        <span class="label">Total Cost:</span>
+        <span class="value cost">{{ formatCurrency(itemStore.totalCost()) }}</span>
+      </div>
+      @if (itemStore.dateRange()) {
+        <div class="summary-item">
+          <span class="label">Date Range:</span>
+          <span class="value">{{ formatDate(itemStore.dateRange()!.min) }} - {{ formatDate(itemStore.dateRange()!.max) }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="items-list">
+      @for (item of itemStore.items(); track item.id) {
+        <app-expense-item-card
+          [item]="item"
+          (edit)="onEditItem($event)"
+          (delete)="onDeleteItem($event)"
+        />
+      }
+    </div>
+  }
+</div>
+
+

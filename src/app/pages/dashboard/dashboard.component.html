@@ -1,0 +1,78 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="w-full flex justify-between items-center border-b border-gray-200 py-4 px-4">
+      <h1 class="text-2xl font-semibold text-primary font-sans flex gap-3 items-center">
+        <img class="w-auto h-10" src="xpnse-logo.svg" alt="Xpnse." />
+      </h1>
+
+      <div class="flex items-center">
+        <button
+          mat-fab
+          color="primary"
+          [routerLink]="['/expense/new']"
+          class="sm:hidden! w-11! h-11! shadow-none! mr-2!"
+          aria-label="Add Expense"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          [routerLink]="['/expense/new']"
+          class="hidden! sm:inline-flex! mr-2!"
+        >
+          <mat-icon>add</mat-icon>
+          Add Expense
+        </button>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="More options"
+          class="sm:hidden! -mr-2"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="More options"
+          class="hidden! sm:inline-flex!"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="mt-2">
+          <button mat-menu-item [routerLink]="['/expense/new']">
+            <mat-icon class="mr-2! text-gray-500!">add</mat-icon>
+            <span class="pr-2">Add Expense</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-search-sort-bar (searchQuery)="onSearch($event)" (sortOption)="onSort($event)" /> -->
+
+  @if (expenseStore.loading()) {
+  <div class="loading">Loading expenses...</div>
+  } @else if (expenseStore.error()) {
+  <div class="error">{{ expenseStore.error() }}</div>
+  } @else if (expensesWithData().length === 0) {
+  <div class="empty-state">
+    <mat-icon>empty</mat-icon>
+    <p>No expenses found. Create your first expense to get started!</p>
+  </div>
+  } @else {
+  <div class="flex flex-col px-4">
+    @for (item of expensesWithData(); track item.expense.id) {
+    <app-expense-card
+      [expense]="item.expense"
+      [totalCost]="item.totalCost"
+      [dateRange]="item.dateRange"
+      [categories]="item.categories"
+      (edit)="onEditExpense($event)"
+      (delete)="onDeleteExpense($event)"
+    />
+    }
+  </div>
+  }
+</div>

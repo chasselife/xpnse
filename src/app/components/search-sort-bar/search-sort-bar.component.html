@@ -1,0 +1,23 @@
+<div class="search-sort-bar">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search</mat-label>
+    <input
+      matInput
+      [value]="searchValue()"
+      (input)="onSearchChange($any($event.target).value)"
+      placeholder="Search expenses..."
+    />
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="sort-field">
+    <mat-label>Sort by</mat-label>
+    <mat-select [value]="sortValue()" (selectionChange)="onSortChange($event.value)">
+      <mat-option value="date">Date</mat-option>
+      <mat-option value="title">Title</mat-option>
+      <mat-option value="cost">Total Cost</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+

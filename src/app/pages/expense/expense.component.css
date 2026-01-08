@@ -1,0 +1,89 @@
+.expense-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.expense-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.expense-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 48px;
+  font-size: 18px;
+}
+
+.error {
+  color: #f44336;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  color: #666;
+}
+
+.empty-state mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  font-size: 18px;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .expense-container {
+    padding: 16px;
+  }
+
+  .expense-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .expense-header h1 {
+    font-size: 24px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

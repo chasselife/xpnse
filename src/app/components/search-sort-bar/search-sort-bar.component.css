@@ -1,0 +1,31 @@
+.search-sort-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-field {
+  flex: 1;
+}
+
+.sort-field {
+  width: 200px;
+}
+
+@media (max-width: 600px) {
+  .search-sort-bar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .sort-field {
+    width: 100%;
+  }
+}
+
+
