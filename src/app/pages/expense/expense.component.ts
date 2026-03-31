@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, effect } from '@angular/core';
+import { Component, OnInit, inject, effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ExpenseCategoryStore } from '../../stores/expense-category.store';
@@ -8,6 +8,7 @@ import { ExpenseCategoryCardComponent } from '../../components/expense-category-
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ExpenseCategory } from '../../models/expense-category.interface';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-expense',
@@ -18,6 +19,7 @@ import { ExpenseCategory } from '../../models/expense-category.interface';
     ExpenseCategoryCardComponent,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
   ],
   providers: [ExpenseCategoryStore],
   templateUrl: './expense.component.html',
@@ -32,12 +34,14 @@ export class ExpenseComponent implements OnInit {
 
   expenseId = '';
   expenseTitle = '';
-  editMode = false;
-  categoriesWithData: Array<{
-    category: ExpenseCategory;
-    totalCost: number;
-    dateRange: { min: string; max: string } | null;
-  }> = [];
+  editMode = signal(false);
+  categoriesWithData = signal<
+    Array<{
+      category: ExpenseCategory;
+      totalCost: number;
+      dateRange: { min: string; max: string } | null;
+    }>
+  >([]);
 
   constructor() {
     effect(() => {
@@ -73,11 +77,11 @@ export class ExpenseComponent implements OnInit {
         };
       })
     );
-    this.categoriesWithData = categoriesWithData;
+    this.categoriesWithData.set(categoriesWithData);
   }
 
   toggleEditMode() {
-    this.editMode = !this.editMode;
+    this.editMode.update((editMode) => !editMode);
   }
 
   onEditCategory(category: ExpenseCategory) {

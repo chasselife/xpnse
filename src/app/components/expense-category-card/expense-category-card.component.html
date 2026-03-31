@@ -1,7 +1,6 @@
 <div
-  class="category-card"
+  class="relative bg-white rounded-lg flex items-center justify-center text-center px-4 py-4"
   [style.background-color]="category().color + '20'"
-  [style.border-color]="category().color"
   [class.edit-mode]="isEditMode() || editMode()"
   (touchstart)="onTouchStart($event)"
   (touchmove)="onTouchMove()"
@@ -9,8 +8,15 @@
   [routerLink]="['/expense', expenseId(), 'category', category().id, 'items']"
 >
   @if (isEditMode() || editMode()) {
-  <button mat-icon-button class="delete-btn" (click)="onDelete(); $event.stopPropagation()">
-    <mat-icon>close</mat-icon>
+
+  <button
+    mat-icon-button
+    color="danger"
+    class="absolute! w-8! h-8! -top-3 -right-3 bg-red-500! rounded-full flex! items-center justify-center text-white! hover:bg-red-600! transition-colors z-20!"
+    (click)="onDelete(); $event.stopPropagation()"
+    [attr.aria-label]="'Delete Category'"
+  >
+    <mat-icon [class]="'text-lg!'">close</mat-icon>
   </button>
   }
   <div class="card-content">
@@ -18,10 +24,7 @@
     <h3>{{ category().title }}</h3>
     <p>{{ category().description }}</p>
     <div class="card-info">
-      <div class="info-item">
-        <span class="label">Total:</span>
-        <span class="value">{{ formatCurrency(totalCost()) }}</span>
-      </div>
+      <span class="text-center">{{ formatCurrency(totalCost()) }}</span>
       @if (dateRange()) {
       <div class="info-item">
         <span class="label">Range:</span>
@@ -32,11 +35,15 @@
       }
     </div>
     @if (isEditMode() || editMode()) {
-    <button mat-raised-button class="edit-btn" (click)="onEdit(); $event.stopPropagation()">
-      <mat-icon>edit</mat-icon>
-      Edit
+    <button
+      mat-mini-fab
+      class="flex! items-center! justify-center! shadow-none! bg-white/50! flex content-center text-sm! md:text-base!"
+      [style.color]="category().color"
+      (click)="onEdit(); $event.stopPropagation()"
+      [attr.aria-label]="'Edit Category'"
+    >
+      <mat-icon class="text-base! w-5! h-5! mb-0!">edit</mat-icon>
     </button>
     }
   </div>
 </div>
-

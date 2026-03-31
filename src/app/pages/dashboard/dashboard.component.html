@@ -65,6 +65,7 @@
   <div class="flex flex-col px-4">
     @for (item of expensesWithData(); track item.expense.id) {
     <app-expense-card
+      class="border-b border-t border-gray-100"
       [expense]="item.expense"
       [totalCost]="item.totalCost"
       [dateRange]="item.dateRange"

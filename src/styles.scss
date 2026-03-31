@@ -1,3 +1,101 @@
 /* You can add global styles to this file, and also import other style files */
 
-@use "tailwindcss";
+@use 'tailwindcss';
+
+@theme {
+  /* Primary color palette based on #1dc873 */
+  --color-primary: #1dc873;
+  --color-primary-50: #e8f8f0;
+  --color-primary-100: #c5eed6;
+  --color-primary-200: #9ee3ba;
+  --color-primary-300: #77d89e;
+  --color-primary-400: #5acf8a;
+  --color-primary-500: #1dc873; // Primary color
+  --color-primary-600: #1ab468;
+  --color-primary-700: #159e5c;
+  --color-primary-800: #118851;
+  --color-primary-900: #0a643f;
+}
+
+* {
+  font-family: var(--font-sans);
+}
+
+body {
+  font-family: var(--font-sans);
+  --mat-button-protected-container-height: 48px;
+  --mat-button-text-container-height: 48px;
+  --mat-button-text-horizontal-padding: 16px;
+  /* background-image: url('/bg.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh; */
+}
+
+/* CDK Drag and Drop Styles */
+.cdk-drag-placeholder {
+  opacity: 0.5 !important;
+  border: 2px dashed #9ca3af !important;
+  border-radius: 0.75rem !important;
+  background: rgba(156, 163, 175, 0.15) !important;
+  backdrop-filter: blur(4px);
+  display: block !important;
+  visibility: visible !important;
+}
+
+.cdk-drag-preview {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25) !important;
+  opacity: 0.95 !important;
+  cursor: grabbing !important;
+  z-index: 1000 !important;
+  overflow: visible;
+  padding: 12px;
+}
+
+.cdk-drag-placeholder.checklist-item {
+  margin-block: 0.725rem;
+}
+
+.cdk-drag-preview .mdc-icon-button {
+  display: none !important;
+  transition: none !important;
+}
+
+.cdk-drag-dragging {
+  transition: none !important;
+  z-index: 1000 !important;
+}
+
+/* Material Dialog Flex Layout */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: 100vh !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface > * {
+  flex-shrink: 0;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface > mat-dialog-content {
+  flex-shrink: 1;
+}
+
+.mat-mdc-dialog-title {
+  padding: 16px 18px 12px !important;
+}
+
+.mat-mdc-dialog-title::before {
+  display: none !important;
+}
+
+mat-dialog-content {
+  padding: 0px 18px 12px !important;
+}
+
+mat-dialog-actions {
+  padding: 8px 18px !important;
+  margin: 0 !important;
+}

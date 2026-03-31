@@ -10,7 +10,7 @@ import { ExpenseCategory } from '../../models/expense-category.interface';
   standalone: true,
   imports: [CommonModule, RouterModule, MatIconModule, MatButtonModule],
   templateUrl: './expense-category-card.component.html',
-  styleUrl: './expense-category-card.component.css'
+  styleUrl: './expense-category-card.component.css',
 })
 export class ExpenseCategoryCardComponent {
   category = input.required<ExpenseCategory>();
@@ -18,16 +18,17 @@ export class ExpenseCategoryCardComponent {
   dateRange = input<{ min: string; max: string } | null>(null);
   expenseId = input.required<string>();
   editMode = input<boolean>(false);
-  
+
   edit = output<ExpenseCategory>();
   delete = output<string>();
+  longPress = output<void>();
 
   longPressTimer: any = null;
   isEditMode = signal(false);
 
   onTouchStart(event: TouchEvent) {
     this.longPressTimer = setTimeout(() => {
-      this.isEditMode.set(true);
+      this.longPress.emit();
     }, 500);
   }
 
@@ -61,9 +62,7 @@ export class ExpenseCategoryCardComponent {
   formatCurrency(amount: number): string {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'USD',
     }).format(amount);
   }
 }
-
-

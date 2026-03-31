@@ -11,7 +11,7 @@ import { ExpenseService } from '../../services/expense.service';
 import { Expense } from '../../models/expense.interface';
 import { ExpenseCardComponent } from '../../components/expense-card/expense-card.component';
 import { MatSelectModule } from '@angular/material/select';
-import { CHECKLIST_ICON_OPTIONS } from '../../constants/icon-options.constant';
+import { ICON_OPTIONS } from '../../constants/icon-options.constant';
 import { COLOR_OPTIONS } from '../../constants/color-options.constant';
 import { ColorPickerComponent } from '../../components/color-picker/color-picker.component';
 
@@ -45,7 +45,7 @@ export class ExpenseFormComponent implements OnInit {
   expenseId: string | null = null;
   isEditMode = false;
 
-  icons = CHECKLIST_ICON_OPTIONS;
+  icons = ICON_OPTIONS;
 
   colorOptions = COLOR_OPTIONS;
 
@@ -53,7 +53,7 @@ export class ExpenseFormComponent implements OnInit {
     this.form = this.fb.group({
       title: ['', [Validators.required]],
       description: [''],
-      icon: ['', [Validators.required]],
+      icon: ['attach_money', [Validators.required]],
       color: ['#2196f3', [Validators.required]],
     });
 
@@ -104,4 +104,3 @@ export class ExpenseFormComponent implements OnInit {
     this.router.navigate(['/']);
   }
 }
-
