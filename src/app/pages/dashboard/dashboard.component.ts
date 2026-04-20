@@ -1,17 +1,16 @@
-import { Component, OnInit, inject, effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { ExpenseStore } from '../../stores/expense.store';
-import { ExpenseCategoryService } from '../../services/expense-category.service';
-import { ExpenseItemService } from '../../services/expense-item.service';
-import { ExpenseCardComponent } from '../../components/expense-card/expense-card.component';
-import { SearchSortBarComponent } from '../../components/search-sort-bar/search-sort-bar.component';
+import { Component, OnInit, effect, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Expense } from '../../models/expense.interface';
+import { Router, RouterModule } from '@angular/router';
+import { ExpenseCardComponent } from '../../components/expense-card/expense-card.component';
 import { ExpenseCategory } from '../../models/expense-category.interface';
+import { Expense } from '../../models/expense.interface';
+import { ExpenseCategoryService } from '../../services/expense-category.service';
+import { ExpenseItemService } from '../../services/expense-item.service';
+import { ExpenseStore } from '../../stores/expense.store';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +19,6 @@ import { ExpenseCategory } from '../../models/expense-category.interface';
     CommonModule,
     RouterModule,
     ExpenseCardComponent,
-    SearchSortBarComponent,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,

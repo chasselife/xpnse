@@ -1,47 +1,85 @@
-<div class="expense-container">
-  <div class="expense-header">
-    <div class="header-left">
+<div class="max-w-6xl mx-auto flex flex-col min-h-dvh">
+  <div class="flex justify-between px-4 py-4">
+    <div class="flex items-center text-primary">
       <a mat-icon-button [routerLink]="['/']">
-        <mat-icon>arrow_back</mat-icon>
+        <mat-icon color="primary">arrow_back</mat-icon>
       </a>
-      <h1>{{ expenseTitle }}</h1>
+      <h1 class="text-2xl truncate">{{ expenseTitle }}</h1>
     </div>
-    <div class="header-actions">
-      <button mat-raised-button color="primary" [routerLink]="['/expense', expenseId, 'category', 'new']">
+
+    <div class="flex items-center">
+      <button
+        mat-fab
+        color="primary"
+        [routerLink]="['/expense', expenseId, 'category', 'new']"
+        class="sm:hidden! w-11! h-11! shadow-none! mr-2!"
+        aria-label="Add Expense Category"
+      >
         <mat-icon>add</mat-icon>
-        New Category
       </button>
-      <button mat-icon-button (click)="toggleEditMode()">
-        <mat-icon>{{ editMode ? 'done' : 'edit' }}</mat-icon>
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/expense', expenseId, 'category', 'new']"
+        class="hidden! sm:inline-flex! mr-2!"
+      >
+        <mat-icon>add</mat-icon>
+        Add Category
       </button>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="More options"
+        class="sm:hidden! -mr-2"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="More options"
+        class="hidden! sm:inline-flex!"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" class="mt-2">
+        <button mat-menu-item [routerLink]="['/expense', expenseId, 'category', 'new']">
+          <mat-icon class="mr-2! text-gray-500!">add</mat-icon>
+          <span class="pr-2">Add Expense Category</span>
+        </button>
+        <button mat-menu-item (click)="toggleEditMode()">
+          <mat-icon class="mr-2! text-gray-500!">edit</mat-icon>
+          <span class="pr-2">Edit Mode</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 
   @if (categoryStore.loading()) {
-    <div class="loading">Loading categories...</div>
+  <div class="loading">Loading categories...</div>
   } @else if (categoryStore.error()) {
-    <div class="error">{{ categoryStore.error() }}</div>
-  } @else if (categoriesWithData.length === 0) {
-    <div class="empty-state">
-      <mat-icon>folder_open</mat-icon>
-      <p>No categories found. Create your first category to get started!</p>
-    </div>
+  <div class="error">{{ categoryStore.error() }}</div>
+  } @else if (categoriesWithData().length === 0) {
+  <div class="empty-state">
+    <mat-icon>folder_open</mat-icon>
+    <p>No categories found. Create your first category to get started!</p>
+  </div>
   } @else {
-    <div class="categories-grid">
-      @for (item of categoriesWithData; track item.category.id) {
-        <app-expense-category-card
-          [category]="item.category"
-          [totalCost]="item.totalCost"
-          [dateRange]="item.dateRange"
-          [expenseId]="expenseId"
-          [editMode]="editMode"
-          (edit)="onEditCategory($event)"
-          (delete)="onDeleteCategory($event)"
-        />
-      }
-    </div>
+  <div
+    class="select-none flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 px-4 mt-6 md:mt-8 content-start"
+  >
+    @for (item of categoriesWithData(); track item.category.id) {
+    <app-expense-category-card
+      [category]="item.category"
+      [totalCost]="item.totalCost"
+      [dateRange]="item.dateRange"
+      [expenseId]="expenseId"
+      [editMode]="editMode()"
+      (longPress)="editMode.set(true)"
+      (edit)="onEditCategory($event)"
+      (delete)="onDeleteCategory($event)"
+    />
+    }
+  </div>
   }
 </div>
-
-
-
