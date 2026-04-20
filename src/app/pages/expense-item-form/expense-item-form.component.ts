@@ -130,4 +130,3 @@ export class ExpenseItemFormComponent implements OnInit {
     this.router.navigate(['/expense', this.expenseId, 'category', this.categoryId, 'items']);
   }
 }
-
